@@ -21,6 +21,7 @@ var WeMeetFacebook = {
 	      // Logged into your app and Facebook.
 	      WeMeet.center("section#who",false)
 	      WeMeet.fadeaway("section#introduction")
+	      WeMeet.initFriendSelect()
 	  } else if (response.status === 'not_authorized') {
 	      // The person is logged into Facebook, but not your app.
 	      $("#facebook-login").removeAttr("disabled")

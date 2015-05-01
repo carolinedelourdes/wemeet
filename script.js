@@ -8,8 +8,8 @@ $(document).ready(function(){
 	});
 	$("#facebook-login").click(function(){
 		$(this).attr("disabled", true)	
-		console.log("Because fuck you that's why.")
 	})
+
 });
 
 /* library */
@@ -30,5 +30,36 @@ var WeMeet = {
 	/* hide */
 	fadeaway: function(InactiveSectionId){
 		$(InactiveSectionId).slideUp("slow")
+	},
+	/* select friends*/
+	initFriendSelect: function(){
+
+			$(document).foundation({
+  				equalizer : {
+		    		equalize_on_stack: true
+		  		}
+			});
+
+			$(".friend").click(function() {
+				if($(this).hasClass("selected"))
+				{
+					$(this).removeClass("selected").addClass("unselected")
+					$(this).appendTo("#friends-select")
+					$(document).foundation('equalizer', 'reflow');
+					numSelected--;
+					if(numSelected <= 0)
+					$("#friends-selected").hide()
+				}
+				else
+				{
+					$(this).removeClass("unselected").addClass("selected")
+					$("#friends-selected").show()
+					$(this).insertBefore("#friends-selected .go-holder")
+					$(document).foundation('equalizer', 'reflow');
+					numSelected++;
+				}
+			});
 	}
+
+
 };

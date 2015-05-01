@@ -1,13 +1,52 @@
 body, p{
-	font-size: 1.5rem; 
+    font-size: 1.5rem; 
 }
 body, h1, h2, h3, h4, h5, h6{
-	font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 section#introduction, section h1
 {
-	text-align: center;
+    text-align: center;
 }
 section#introduction h1 {
     font-size: 4.25rem;
+}
+.friend{
+    font-size: 0.75rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+.friend > .profile-photo {
+    width: 30%;
+    padding-right: 0.5rem;
+    float: left;
+}
+.friend > .profile-photo .photo-wrap {
+    /* max-width: 80px; */
+}
+.friend > .details {
+    width: 70%;
+    float: right;
+    /* border: 1px solid; */
+}
+.friend-name {
+    font-weight: bold;
+    font-size: larger;
+}
+input#search-friends {
+    border-radius: 1em;
+}
+section#friends-selected {
+    display: none;
+    border-bottom: 1px solid gray;
+    margin-bottom: 16px;
+}
+.go-holder.small-6.columns {
+    display: flex;
+}
+.go-holder button {
+    align-self: flex-end;
+}
+.go-holder .fi-arrow-right {
+    margin-left: 1em;
 }
