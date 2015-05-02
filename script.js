@@ -8,10 +8,8 @@ $(document).ready(function(){
 	});
 	$("#facebook-login").click(function(){
 		$(this).attr("disabled", true)	
-	})
-
+	})s
 });
-
 /* library */
 var WeMeet = {
 	/* center active section */
@@ -33,13 +31,11 @@ var WeMeet = {
 	},
 	/* select friends*/
 	initFriendSelect: function(){
-
 			$(document).foundation({
   				equalizer : {
 		    		equalize_on_stack: true
 		  		}
 			});
-
 			$(".friend").click(function() {
 				if($(this).hasClass("selected"))
 				{
@@ -60,6 +56,4 @@ var WeMeet = {
 				}
 			});
 	}
-
-
 };

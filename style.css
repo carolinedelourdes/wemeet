@@ -1,8 +1,13 @@
+/* Global */
 body, p{
     font-size: 1.5rem; 
 }
 body, h1, h2, h3, h4, h5, h6{
     font-family: 'Roboto', sans-serif;
+}
+section#who input,
+section#what input{
+    border-radius: 1em;
 }
 section#introduction, section h1
 {
@@ -11,6 +16,7 @@ section#introduction, section h1
 section#introduction h1 {
     font-size: 4.25rem;
 }
+/* Who */
 .friend{
     font-size: 0.75rem;
     padding-bottom: 1rem;
@@ -33,9 +39,6 @@ section#introduction h1 {
     font-weight: bold;
     font-size: larger;
 }
-input#search-friends {
-    border-radius: 1em;
-}
 section#friends-selected {
     display: none;
     border-bottom: 1px solid gray;
@@ -48,5 +51,23 @@ section#friends-selected {
     align-self: flex-end;
 }
 .go-holder .fi-arrow-right {
-    margin-left: 1em;
+    margin-left: 1rem;
+} 
+/* What */
+#map-canvas{
+    width: 100%;
+    background-color: green;
+    min-height: 15rem;
+}
+#what-intro{
+    margin: 1rem 0;
+}
+#who-is{
+    margin: 1rem 0;
+}
+#who-is .row .friend:last-child {
+  float: left;
+}
+#who-is h2{
+    font-size: 1.25rem;
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>Matt Guyadeen</name>
+    <description>Thousand Oaks, CA</description>
+    <Point>
+      <coordinates>34.189764, -118.844758</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>Vinit Varghese</name>
+    <description>Newburk Park, CA</description>
+    <Point>
+      <coordinates>34.201167, -118.923688</coordinates>
+    </Point>
+  </Placemark>
+  <Placemark>
+    <name>The German</name>
+    <description>Ventura, CA</description>
+    <Point>
+      <coordinates>34.276141, -119.295788</coordinates>
+    </Point>
+  </Placemark>
+</kml>
