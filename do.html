@@ -18,40 +18,40 @@
 	          zoom: 12,
 	          mapTypeId: google.maps.MapTypeId.ROADMAP
 	        }
-
-	        var map = new google.maps.Map(mapCanvas, mapOptions)
-	        
+	        var map = new google.maps.Map(mapCanvas, mapOptions)	        
 	        var friends = [
-	        	new friend { 
-	        		latitude: 34.189764,
-	        		longitude: -118.844758,
+	        	{ 
+	        		coordinates: new google.maps.LatLng(34.189764,-118.844758),
     				title: 'Matt Guyadeen'
 	        	},
-	        	new friend {
-	        		latitude: 34.201167,
-	        		longitude: -118.923688,
+	        	{
+	        		coordinates: new google.maps.LatLng(34.201167,-118.923688),
     				title: 'Vinit Varghese'
 	        	},
-	        	new friend { 
-	        		latitude: 34.276141,
-	        		longitude: -119.295788,
+	        	{ 
+	        		coordinates: new google.maps.LatLng(34.276141,-119.295788),
     				title: 'The German'
 	        	}
 	        ];
-
 	        var numFriends = 3;
-
-	        for(int i = 0; i < numFriends; i++)
+	        // create a marker for each friend
+	        for(i = 0; i < numFriends; i++)
 	        {
-
 		        var marker = new google.maps.Marker({
-				      position: new google.maps.LatLng(friends[i].latitude, friends[i].longitude),
+				      position: friends[i].coordinates,
 				      map: map,
-				      title: friends[i].title
+				      title: friends[i].title,
+				      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 			  	});
 	        }
+	        // draw the boundary box for all of the friends
+			var bounds = new google.maps.LatLngBounds ();
+			for (var i = 0; i < numFriends; i++) {
+			  bounds.extend(friends[i].coordinates);
+			}
+			//  Fit these bounds to the map
+			map.fitBounds (bounds);
       }
-
       google.maps.event.addDomListener(window, 'load', initializeMap);
 	</script>
 </head>
@@ -120,6 +120,51 @@
 								<div class="friend-location">Ventura, CA</div>
 							</div>						
 					</div>					
+			</section>
+			<section id="likes">
+				<div class="row">
+					<div class="small-12 columns">
+						<h2>Liked by your friends</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-6 medium-4 large-3 columns">
+						<ul>
+							<li>Apples</li>
+							<li>Apricots</li>
+							<li>Carrots</li>
+							<li>Caulifllower</li>
+							<li>Cucumbers</li>
+						</ul>
+					</div>
+					<div class="small-6 medium-4 large-3 columns">
+						<ul>
+							<li>Apples</li>
+							<li>Apricots</li>
+							<li>Carrots</li>
+							<li>Caulifllower</li>
+							<li>Cucumbers</li>
+						</ul>
+					</div>
+					<div class="small-6 medium-4 large-3 columns">
+						<ul>
+							<li>Apples</li>
+							<li>Apricots</li>
+							<li>Carrots</li>
+							<li>Caulifllower</li>
+							<li>Cucumbers</li>
+						</ul>
+					</div>
+					<div class="small-6 medium-4 large-3 columns">
+						<ul>
+							<li>Apples</li>
+							<li>Apricots</li>
+							<li>Carrots</li>
+							<li>Caulifllower</li>
+							<li>Cucumbers</li>
+						</ul>
+					</div>
+				</div>			
 			</section>
 		</section>
 		<section id="where" class="small-12 medium-centered columns" hidden>

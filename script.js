@@ -8,7 +8,7 @@ $(document).ready(function(){
 	});
 	$("#facebook-login").click(function(){
 		$(this).attr("disabled", true)	
-	})s
+	})
 });
 /* library */
 var WeMeet = {

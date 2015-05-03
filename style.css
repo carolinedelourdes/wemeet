@@ -4,6 +4,7 @@ body, p{
 }
 body, h1, h2, h3, h4, h5, h6{
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 section#who input,
 section#what input{
@@ -15,6 +16,9 @@ section#introduction, section h1
 }
 section#introduction h1 {
     font-size: 4.25rem;
+}
+section section h2{
+    font-size: 1.25rem;
 }
 /* Who */
 .friend{
@@ -65,9 +69,7 @@ section#friends-selected {
 #who-is{
     margin: 1rem 0;
 }
-#who-is .row .friend:last-child {
+#who-is .row .friend:last-child,
+#likes .row .columns:last-child {
   float: left;
-}
-#who-is h2{
-    font-size: 1.25rem;
 }
