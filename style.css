@@ -61,15 +61,27 @@ section#friends-selected {
 #map-canvas{
     width: 100%;
     background-color: green;
-    min-height: 15rem;
+    min-height: 20rem;
 }
 #what-intro{
     margin: 1rem 0;
 }
-#who-is{
+#what section h2{
     margin: 1rem 0;
 }
 #who-is .row .friend:last-child,
 #likes .row .columns:last-child {
   float: left;
 }
+section#likes{
+    background-color: whitesmoke;
+}
+#likes li {
+    list-style: none;
+}
+#likes ul {
+    margin: 0;
+}
+/* For Google Map UI Glitch */
+#map-canvas img { max-width: none; }
+#map-canvas label { width: auto; display: inline; }
