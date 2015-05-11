@@ -37,7 +37,7 @@
 		{ 
 			coordinates: new google.maps.LatLng(34.276141,-119.295788),
 			title: 'The German',
-			photo: 'http://lorempixel.com/50/50/people?f=2'
+			photo: 'http://lorempixel.com/50/50/people?f=3'
 		}
 		];
 		var numFriends = 3;
@@ -103,20 +103,27 @@
 	 		var request = {
 				keyword: query,
 				location: centerPoint,
-				radius: 8046.72, // 5 miles in meters
-				types: ['establishment']
+				radius: 10000,
+				types: ['establishment']//,
+				//rankBy: google.maps.places.RankBy.DISTANCE
 			}
-
 			service.nearbySearch(request, callback)
 		}
-
 		// display search markers
 		function callback(results, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
-				for (var i = 0; i < results.length; i++) {
+				var numResults = results.length
+				$("#no-results").fadeOut("fast")
+				for (var i = 0; i < numResults; i++) {
 					createMarker(results[i])
-				}
+				}				
+				// make sure the center marker is always visible
+				centerMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
 			}
+			else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) 
+			{
+				$("#no-results").fadeIn("slow")
+			} 
 			// make sure search input is enabled
 			$("#search-stuff input").prop("disabled",false)
 		}
@@ -124,35 +131,23 @@
 		function createMarker(place) {
 			var placeLoc = place.geometry.location
 			var marker = new google.maps.Marker({
+				title: place.name,
 				map: map,
 				position: place.geometry.location
 			});
 			searchMarkers.push(marker)
 		}
 		}
-
 		// init map
 		google.maps.event.addDomListener(window, 'load', initializeMap)
 
 		</script>
 		<style>
-
-		#markerLayer img {
-        	max-width: 1.5rem;
-  			max-height: 1.5rem;
-  			border-radius: 1.5rem;
-      	}
-
-      	span.clickable
-      	{
- 			border-bottom: 1px solid gray;
-  			cursor: pointer;
-      	}
- 		
-
-
-
-	
+			#markerLayer img {
+			    max-width: 1.5rem;
+			    max-height: 1.5rem;
+			    border-radius: 1.5rem;
+			}
 		</style>
 	</head>
 	<body>
@@ -178,6 +173,9 @@
 					<input disabled type="search" placeholder="Search for things to do..."/> 
 				</form>
 			</div>
+		</div>
+		<div id="no-results">
+			No results.
 		</div>
 		<div id="map-canvas"></div>
 		<section id="who-is">
@@ -239,9 +237,9 @@
 					</div>
 					<div class="small-6 medium-4 large-3 columns">
 						<ul>
-							<li><span class="clickable">Chipotle</span></li>
-							<li><span class="clickable">Korean BBQ</span></li>
-							<li><span class="clickable">Pizza</span></li>
+							<li><span class="clickable">Tacos</span></li>
+							<li><span class="clickable">Sushi</span></li>
+							<li><span class="clickable">Vegetarian</span></li>
 							<li><span class="clickable">Pho</span></li>
 							<li><span class="clickable">Subway</span></li>
 						</ul>
@@ -264,11 +262,8 @@
 							<li><span class="clickable">Subway</span></li>
 						</ul>
 					</div>
-				</div>			
+				</div>					
 			</section>
-		</section>
-		<section id="where" class="small-12 medium-centered columns" hidden>
-			<h1>And the winner is...</h1>
 		</section>
 	</main>
 	<script src="js/vendor/jquery.js"></script>	

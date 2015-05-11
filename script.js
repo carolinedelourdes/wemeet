@@ -8,10 +8,15 @@ $(document).ready(function(){
 	});
 	$("#facebook-login").click(function(){
 		$(this).attr("disabled", true)	
+		FB.login(function(response) {
+			WeMeetFacebook.statusChangeCallback(response)			
+		}, {scope: 'user_location,user_friends'});
 	})
 });
 /* library */
 var WeMeet = {
+	friends: [],
+	numFriends: 0,
 	/* center active section */
 	center: function(ActiveSectionId,animate,reveal){
 		var introMargins = ($(window).height() - $(ActiveSectionId).height()) / 2
@@ -31,6 +36,7 @@ var WeMeet = {
 	},
 	/* select friends*/
 	initFriendSelect: function(){
+			WeMeetFacebook.GetFriends()
 			$(document).foundation({
   				equalizer : {
 		    		equalize_on_stack: true
@@ -55,5 +61,19 @@ var WeMeet = {
 					numSelected++;
 				}
 			});
+	},
+	makeFriendsList: function (response){
+		var friends = [];
+		var numFriends = response.data.length
+		// build friends list
+		for(var i = 0; i < numFriends; i++)
+		{
+			this.friends.push({
+				coordinates: new google.maps.LatLng(34.189764,-118.844758),
+				title: response.data[i].name,
+				photo: 'http://lorempixel.com/50/50/people?f=0'
+			});
+		}
+		console.log(friends)
 	}
 };

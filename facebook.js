@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  //$.ajaxSetup({ cache: true });
   $.getScript('//connect.facebook.net/en_UK/all.js', function(){
   	FB.init({
   		appId: '342664942589806',
@@ -7,30 +6,48 @@ $(document).ready(function() {
   	$('#loginbutton,#feedbutton').removeAttr('disabled');
   	FB.getLoginStatus(WeMeetFacebook.statusChangeCallback);
   })
-/*
-FB.login(function(response) {
-  		if (!response.authResponse) {
-  			$("#facebook-login").removeAttr("disabled")
-  			$("#facebook-login").text("Connect to Facebook")
-  		}
- });*/
 });
 var WeMeetFacebook = {
 	statusChangeCallback: function(response){		
-		if (response.status === 'connected') {
-	      // Logged into your app and Facebook.
-	      WeMeet.center("section#who",false)
-	      WeMeet.fadeaway("section#introduction")
-	      WeMeet.initFriendSelect()
-	  } else if (response.status === 'not_authorized') {
-	      // The person is logged into Facebook, but not your app.
-	      $("#facebook-login").removeAttr("disabled")
-	      $("#facebook-login").text("Connect to Facebook")
-	  } else {
-	      // The person is not logged into Facebook, so we're not sure if
-	      // they are logged into this app or not.
-	      $("#facebook-login").removeAttr("disabled")
-	      $("#facebook-login").text("Login to Facebook")
-	  }
-	}
+		if (response.status === 'connected') {				
+			// Logged into your app and Facebook.
+			FB.api("/me/permissions/user_friends", function (response) {
+				// response returned
+	      		if (response && !response.error) {
+	      			// has location permission
+	      			if(response.data[0] && response.data[0].status === "granted")
+	      			{
+	      				WeMeet.center("section#who",false)
+						WeMeet.fadeaway("section#introduction")
+						WeMeet.initFriendSelect()
+	      			}
+	      			// does not have location permission
+					else
+	      			{      				
+	      				$("#facebook-login").removeAttr("disabled")
+						$("#facebook-login").text("Share Facebook Friends List")		
+	      			}  	
+      			}   
+      			// display an error (this shouldn't happen...)
+      			else
+      			{
+      				$("#facebook-login").text("Facebook Error")	
+      			}      					
+   			 });		
+		}
+		// The person is logged into Facebook, but on the app
+		else if (response.status === 'not_authorized') {
+			$("#facebook-login").removeAttr("disabled")
+			$("#facebook-login").text("Connect to Facebook")
+		}
+		// The person is not logged into Facebook
+		else
+		{
+			$("#facebook-login").removeAttr("disabled")
+			$("#facebook-login").text("Login to Facebook")
+		}
+	},
+	GetFriends: function(){
+		FB.api("/me/friends", WeMeet.makeFriendsList)
+	}	
 }

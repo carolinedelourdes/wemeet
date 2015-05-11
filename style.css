@@ -20,6 +20,15 @@ section#introduction h1 {
 section section h2{
     font-size: 1.25rem;
 }
+@media only screen and (max-width: 40em) {
+    section h1{
+        font-size: 1.75rem;
+    }
+}
+/* Introduction */
+#introduction p.info {
+  font-size: 0.75rem;
+}
 /* Who */
 .friend{
     font-size: 0.75rem;
@@ -75,12 +84,31 @@ section#friends-selected {
 }
 section#likes{
     background-color: whitesmoke;
+    padding-bottom: 1rem;
 }
 #likes li {
     list-style: none;
 }
 #likes ul {
     margin: 0;
+}
+
+span.clickable
+{
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+}
+#no-results {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    font-size: 1rem;
+    color: whitesmoke;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    top: 50%;
+    left: 50%;
 }
 /* For Google Map UI Glitch */
 #map-canvas img { max-width: none; }
