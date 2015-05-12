@@ -6,67 +6,98 @@ body, h1, h2, h3, h4, h5, h6{
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
-section#who input,
-section#what input{
-    border-radius: 1em;
-}
-section#introduction, section h1
-{
-    text-align: center;
-}
-section#introduction h1 {
-    font-size: 4.25rem;
-}
-section section h2{
-    font-size: 1.25rem;
-}
 @media only screen and (max-width: 40em) {
     section h1{
         font-size: 1.75rem;
     }
 }
-/* Introduction */
-#introduction p.info {
-  font-size: 0.75rem;
+h2.subsection{
+    margin: 1rem 0;
+    font-size: 1.25rem;
 }
-/* Who */
-.friend{
+p.info{
     font-size: 0.75rem;
-    padding-bottom: 1rem;
+}
+span.clickable
+{
+    border-bottom: 1px solid gray;
     cursor: pointer;
 }
-.friend > .profile-photo {
+.message-holder .info {
+    line-height: 1rem;
+}
+.row.message-holder {
+    height: 1rem;
+}
+/* Introduction */
+#introduction, section h1
+{
+    text-align: center;
+}
+#introduction h1 {
+    font-size: 4.25rem;
+}
+#introduction p.info {
+    text-align: center; 
+    max-width: 45rem; 
+    margin: auto;
+}
+/* Who */
+#who, #all-going, #done-selecting{
+    display: none;
+}
+#who h1{
+    margin-top: 2rem;
+}
+#who > .info{
+    margin-bottom: 0;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.friend{
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+}
+.friend .friend-wrapper{
+  background-color: #f6f7f8;
+  box-shadow: 1px 1px #D8DADC;
+  cursor: pointer;
+}
+.friend.selected .friend-wrapper {
+  color: whitesmoke;
+  box-shadow: 1px 1px #238896;
+  background-color: #2daebf;
+}
+.friend .photo-wrap {
     width: 30%;
     padding-right: 0.5rem;
     float: left;
 }
-.friend > .profile-photo .photo-wrap {
-    /* max-width: 80px; */
+.friend .photo-wrap .profile-photo img {
+    border-radius: 50%;
 }
-.friend > .details {
+.friend .details{
     width: 70%;
-    float: right;
-    /* border: 1px solid; */
+    float: left;
 }
-.friend-name {
+.friend .details .friend-name {
     font-weight: bold;
-    font-size: larger;
+    font-size: 0.75rem;
 }
-section#friends-selected {
-    display: none;
-    border-bottom: 1px solid gray;
-    margin-bottom: 16px;
-}
-.go-holder.small-6.columns {
+#done-holder.small-6.columns {
     display: flex;
 }
-.go-holder button {
+#done-holder button {
     align-self: flex-end;
 }
-.go-holder .fi-arrow-right {
+#done-holder .fi-arrow-right {
     margin-left: 1rem;
 } 
+
 /* What */
+#what{
+    display: none;
+}
 #map-canvas{
     width: 100%;
     background-color: green;
@@ -78,7 +109,7 @@ section#friends-selected {
 #what section h2{
     margin: 1rem 0;
 }
-#who-is .row .friend:last-child,
+#who .row .friend:last-child,
 #likes .row .columns:last-child {
   float: left;
 }
@@ -92,12 +123,7 @@ section#likes{
 #likes ul {
     margin: 0;
 }
-
-span.clickable
-{
-    border-bottom: 1px solid gray;
-    cursor: pointer;
-}
+/* Google Map */
 #no-results {
     display: none;
     position: absolute;
