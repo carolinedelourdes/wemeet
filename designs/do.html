@@ -11,6 +11,8 @@
 	<script src="../js/vendor/modernizr.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;libraries=places"></script>
 	<script>
+	var map;
+	var service;
 	function initializeMap() {
 		var mapCanvas = document.getElementById('map-canvas');
 		var mapOptions = {
@@ -21,7 +23,7 @@
 			streetViewControl: false,
 			mapTypeControl: false
 		}
-		var map = new google.maps.Map(mapCanvas, mapOptions)	        
+		map = new google.maps.Map(mapCanvas, mapOptions)	        
 		var friends = [
 		{ 
 			coordinates: new google.maps.LatLng(34.189764,-118.844758),
@@ -81,7 +83,8 @@
 		var searchMarkers = [];
 		// make sure search box is enabled
 		$("#search-stuff input").prop("disabled",false)
-		var service = new google.maps.places.PlacesService(map)
+		
+		service = new google.maps.places.PlacesService(map)
 		// search box submit
 		$("#search-stuff").submit(function(event) {			
 			mapRequest($("#search-stuff").children("input").val())
@@ -161,7 +164,7 @@
 		<!--<section id="who" class="small-12 medium-centered columns" >
 	</section>-->		
 	<!-- </div> -->
-	<section id="what">
+	<section id="what" style="display:block;">
 		<div id="what-intro">
 			<div class="row">
 				<div class=" small-12 medium-centered columns">

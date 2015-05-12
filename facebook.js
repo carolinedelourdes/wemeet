@@ -18,7 +18,7 @@ var WeMeetFacebook = {
 	      			// has location permission
 	      			if(response.data[0] && response.data[0].status === "granted")
 	      			{
-	      				WeMeet.initFriendSelect()
+	      				WeMeet.initWho()
 	      			}
 	      			// does not have location permission
 	      			else

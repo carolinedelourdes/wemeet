@@ -34,11 +34,11 @@ var WeMeet = {
 		}
 	}, // center
 	/* select friends*/
-	initFriendSelect: function(){
+	initWho: function(){
 		$("#introduction").slideUp("slow")
 		$("#who").fadeIn("slow")
 		WeMeetFacebook.getMe()// calls makeMe
-	}, // initFriendSelect()
+	}, // initWho()
 	// CALLBACK put user into WeMeet friends variable
 	makeMe: function (response){
 		// add current user if all the required information is there
@@ -113,6 +113,11 @@ var WeMeet = {
 		    		equalize_on_stack: true
 		  		}
 			});
+			// event listener to go location search
+			$("#done-selecting").click(function(){
+				$(this).attr("disabled",true)
+				WeMeet.initWhat()
+			})
 			// event listener to move or remove friend from selection area
 			$(".friend").click(function() {
 				if($(this).hasClass("selected"))
@@ -159,9 +164,26 @@ var WeMeet = {
 				}
 			}); // friend.click()
 	}, // initFriendBehavior()
-	initMap: function()
+	initWhat: function()
 	{
-		
+		$("#done-selecting").fadeOut()
+		$("#who").slideUp("slow")
+		$("#friends-selected").insertAfter("#who-is-heading")
+		$("#what").fadeIn("slow")
+		$(".google-attribution-holder").fadeIn("slow")
+
+		/*
+		var mapCanvas = document.getElementById('map-canvas');
+		var mapOptions = {
+			center: new google.maps.LatLng(34.201167, -118.923688), // default to Camarillo, just because :)
+			zoom: 12,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: false,
+			streetViewControl: false,
+			mapTypeControl: false
+		}
+		WeMeetGoogleMap.initGoogleMap(mapCanvas,MapOptions)*/
+
 	}
 
 }; // WeMeet
