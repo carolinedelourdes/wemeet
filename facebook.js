@@ -12,7 +12,7 @@ var WeMeetFacebook = {
 		if (response.status === 'connected') {				
 			// Logged into your app and Facebook.
 			// To do.. check for Friends AND Location Permission
-			FB.api("/me/permissions/user_friends", function (response) {
+			FB.api("/me/permissions/user_location", function (response) {
 				// response returned
 				if (response && !response.error) {
 	      			// has location permission

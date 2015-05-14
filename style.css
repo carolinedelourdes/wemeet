@@ -18,9 +18,11 @@ h2.subsection{
 p.info{
     font-size: 0.75rem;
 }
-span.clickable
+span.selectable
 {
     border-bottom: 1px solid gray;
+}
+.selectable{
     cursor: pointer;
 }
 .message-holder .info {
@@ -64,20 +66,21 @@ main.row{
 .friend .friend-wrapper{
   background-color: #f6f7f8;
   box-shadow: 1px 1px #D8DADC;
-  cursor: pointer;
 }
 .friend.selected .friend-wrapper {
   color: whitesmoke;
   box-shadow: 1px 1px #238896;
   background-color: #2daebf;
 }
-.friend .photo-wrap {
+.friend .profile-photo .photo-wrap {
     width: 30%;
     padding-right: 0.5rem;
     float: left;
 }
-.friend .photo-wrap .profile-photo img {
+.friend .profile-photo .photo-wrap img {
     border-radius: 50%;
+    width: 100%;
+    height: auto;
 }
 .friend .details{
     width: 70%;
@@ -140,15 +143,43 @@ main.row{
     top: 50%;
     left: 50%;
 }
-/* For Google Map UI Glitch */
+/* For Google Map */
 #map-canvas img { max-width: none; }
 #map-canvas label { width: auto; display: inline; }
-/* Footer */
-.google-attribution-holder{
-    margin-top: 1rem;
-    display: none;
+article.place {
+  font-size: 1rem;
 }
-#google-attribution{
+article.place .heading{
+  height: 1rem;
+}
+article.place .icon{
+  height: 70%;
+  display: inline;
+  vertical-align: baseline;
+  padding-right: 1rem;
+}
+article.place h1 {
+  display: inline;
+  font-size: 1rem;
+  font-weight: 600;
+}
+article.place address {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: gray;
+  display: inline;
+}
+article.place .cost {
+  font-size: 0.75rem;
+  color: #00933B;
+  font-weight: 600;
+}
+
+/* Footer */
+#google-logo-holder{
+    margin-top: 1rem;
+}
+#google-logo{
     display: block;
     margin: auto;
 }
