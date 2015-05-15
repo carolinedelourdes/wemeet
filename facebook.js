@@ -8,31 +8,39 @@ $(document).ready(function() {
 	})
 });
 var WeMeetFacebook = {
-	statusChangeCallback: function(response){		
+	statusChangeCallback: function(response){	
+		// Logged into your app and Facebook; Check permissions	
 		if (response.status === 'connected') {				
-			// Logged into your app and Facebook.
-			// To do.. check for Friends AND Location Permission
-			FB.api("/me/permissions/user_location", function (response) {
-				// response returned
+			FB.api("/me/permissions",function (response) {
+				var hasFriends = false
+				var hasLocation = false
+				var hasResponse = false
 				if (response && !response.error) {
-	      			// has location permission
-	      			if(response.data[0] && response.data[0].status === "granted")
-	      			{
-	      				WeMeet.initWho()
-	      			}
-	      			// does not have location permission
-	      			else
-	      			{      				
-	      				$("#facebook-login").removeAttr("disabled")
-	      				$("#facebook-login").text("Authorize WeMeet")		
-	      			}  	
-	      		}   
-      			// display an error (this shouldn't happen...)
+					hasResponse = true
+					for(var i = 0; i < response.data.length; i++){
+						if(response.data[i].permission === "user_location" && response.data[i].status === "granted")
+							hasLocation = true
+						if(response.data[i].permission === "user_friends" && response.data[i].status === "granted")
+							hasFriends = true
+						if(hasFriends && hasLocation)
+							break
+					}
+				}
+				// has all needed permissions
+				if(hasFriends && hasLocation)
+					WeMeet.initWho()
+				// is logged in, but missing permissions
+      			else if(hasResponse)
+      			{      				
+      				$("#facebook-login").removeAttr("disabled")
+      				$("#facebook-login").text("Authorize WeMeet")		
+      			}  	
+      			// This shouldn't happen...
       			else
       			{
       				$("#facebook-login").text("Facebook Error")	
-      			}      					
-      		});		
+      			}   
+			});				
 		}
 		// The person is logged into Facebook, but on the app
 		else if (response.status === 'not_authorized') {

@@ -15,14 +15,11 @@ var WeMeetGoogle = {
 	getPeopleCoordinates: function(currentPerson,isLastPerson,callback)
 	{
 		var city = currentPerson.location
-		WeMeetGoogle.service.textSearch({query: city }, function(response){ 
-		//if(typeof response[0] != "undefined" && response[0].geometry != "undefined" && response[0].geometry.location != "undefined")
-		//	currentPerson.coordinates = new google.maps.LatLng(parseInt(response[0].geometry.location.k),parseInt(response[0].geometry.location.D))
-		currentPerson.coordinates = new google.maps.LatLng(parseFloat(response[0].geometry.location.k),parseFloat(response[0].geometry.location.D))		
-		if(isLastPerson){
+		WeMeetGoogle.service.textSearch({query: city }, function(response){ 		
+		currentPerson.coordinates = new google.maps.LatLng(parseFloat(response[0].geometry.location.k),parseFloat(response[0].geometry.location.D))				
+		if(isLastPerson)
 			callback()
-			console.log("last person")
-		}
+		
 		});			
 	},
 	setCenterAndBounds: function(){
@@ -32,14 +29,14 @@ var WeMeetGoogle = {
 		 	WeMeetGoogle.bounds.extend(WeMeetGoogle.people[i].coordinates)
 		 }
 		 WeMeetGoogle.centerPoint = WeMeetGoogle.bounds.getCenter()
-		},
-		centerMap: function(){
+	},
+	centerMap: function(){
 		//  Fit these bounds to the map
 		WeMeetGoogle.map.fitBounds(WeMeetGoogle.bounds)
 	},
 	initMap: function(mapCanvas,people)
 	{
-		console.log("init map")
+		//console.log("init map")
 		// set people and num people
 		WeMeetGoogle.people = people
 		WeMeetGoogle.numPeople = people.length
@@ -90,13 +87,12 @@ var WeMeetGoogle = {
 	{
 		var request = {
 			location: WeMeetGoogle.centerPoint,
-			radius: 10000,
+			radius: 5000,
 			types: ['establishment']
 		}
-		console.log(request)
 		WeMeetGoogle.service.nearbySearch(request, callback);
 	},
-	mapRequest: function(query,callback)
+	mapRequest: function(query,limit,callback)
 	{
 		// remove previous search markers
 		for (var i = 0, marker; marker = WeMeetGoogle.searchMarkers[i]; i++) {
@@ -108,22 +104,25 @@ var WeMeetGoogle = {
 			location: WeMeetGoogle.centerPoint,
 			radius: 10000,
 			types: ['establishment']//,
-			//rankBy: google.maps.places.RankBy.DISTANCE
 		}
 		WeMeetGoogle.service.nearbySearch(request, function(results, status){
-			console.log(results)
+			//console.log(results)
 			var returnStatus = false
 			// add marker for earch search result and set flag
 			if (status == google.maps.places.PlacesServiceStatus.OK)
 			{
 				returnStatus = true
 				var numResults = results.length
+				// check if numResutls exceed limit, if so cut back
+				if(limit > 0 && numResults > limit)
+					numResults = limit
+				// display marker for each search result
 				for (var i = 0; i < numResults; i++) {
 					WeMeetGoogle.createMarker(results[i])
 				}	
 			}
 			// make sure the center marker is always visible
-			WeMeetGoogle.centerMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+			//WeMeetGoogle.centerMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
 			// WeMeet callback
 			callback(returnStatus)
 		})

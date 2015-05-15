@@ -10,7 +10,7 @@ $(document).ready(function(){
 		$(this).attr("disabled", true)	
 		FB.login(function(response) {
 			WeMeetFacebook.statusChangeCallback(response)			
-		}, {scope: 'user_location,user_friends,user_likes'});
+		}, {scope: 'user_location,user_friends'});
 	})
 });
 /* library */
@@ -215,18 +215,18 @@ var WeMeet = {
 		// disable button, get coordinates for selected friends
 		$("#done-selecting").attr("disabled",true).text("Getting Map Information")
 		var callback = false // this indicates if the callback should be called (display map when all friend data is available)
+		var last = WeMeet.numPeople - 1
+		
 		for(var i = 0; i < WeMeet.numPeople; i++)
 		{
-			console.log(i)
-			console.log(WeMeet.friends[i])
+			//console.log(i +" of" + last)
 			// the last friend
-			if(i === (WeMeet.numPeople -1))
+			if(i === last)
 				callback = true	
 			if(typeof WeMeet.friends[i].selected != "undefined" && WeMeet.friends[i].selected === true)
 				WeMeetGoogle.getPeopleCoordinates(WeMeet.friends[i],callback,WeMeet.getCoordinatesCallBack)
-			else if(callback)
-				WeMeet.getCoordinatesCallBack()
 		}		
+
 		// display map section		
 		$("#done-selecting").fadeOut()
 		$("#who").slideUp("slow")
@@ -238,21 +238,14 @@ var WeMeet = {
 	  		WeMeetGoogle.centerMap()
 		});
 		$("#search-stuff").submit(function(event) {			
-			WeMeetGoogle.mapRequest($("#search-stuff").children("input").val(),WeMeet.mapSearchCallback)
+			WeMeetGoogle.mapRequest($("#search-stuff").children("input").val(),10,WeMeet.mapSearchCallback)
 			event.preventDefault()
 			return false
 		});
 		// make sure search box is enabled
 		$("#search-stuff input").prop("disabled",false)
-		
-		
-
-
 	},
 	makeNearbyHTML: function(response){
-		console.log(response)
-		console.log(response.length)
-		console.log(response[0].name)
 		var numPlaces = response.length
 		var html = ""
 		for(var i = 0; i < numPlaces; i++)
@@ -266,7 +259,7 @@ var WeMeet = {
 		// friend like submit
 		$( "#like-list li" ).click(function() {
 			$("body").animate({scrollTop:0}, '500', 'swing') 
-  			WeMeetGoogle.mapRequest($(this).text(),WeMeet.mapSearchCallback)
+  			WeMeetGoogle.mapRequest($(this).text(),1,WeMeet.mapSearchCallback)
 		});
 	},
 	getCoordinatesCallBack: function(){

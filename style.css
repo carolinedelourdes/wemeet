@@ -31,6 +31,11 @@ span.selectable
 .row.message-holder {
     height: 1rem;
 }
+#who .row .friend:last-child,
+#who-is .row .friend:last-child,
+#likes .row .columns:last-child {
+  float: left;
+}
 /* Introduction */
 #introduction, section h1
 {
@@ -109,7 +114,7 @@ main.row{
 }
 #map-canvas{
     width: 100%;
-    background-color: rgb(0, 175, 90);
+    /*background-color: rgb(0, 175, 90);*/
     min-height: 20rem;
 }
 #what-intro{
@@ -118,17 +123,14 @@ main.row{
 #what section h2{
     margin: 1rem 0;
 }
-#who .row .friend:last-child,
-#who-is .row .friend:last-child,
-#likes .row .columns:last-child {
-  float: left;
-}
-#likes li {
-    list-style: none;
-}
 #likes ul {
     margin: 0;
     margin-left: 1rem;
+}
+#likes li {
+    list-style: none;
+    font-size: 0.75rem;
+    padding: 0.2rem 0;
 }
 /* Google Map */
 #no-results {
@@ -174,7 +176,6 @@ article.place .cost {
   color: #00933B;
   font-weight: 600;
 }
-
 /* Footer */
 #google-logo-holder{
     margin-top: 1rem;
